@@ -24,6 +24,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         yeoman: yeomanConfig,
         watch: {
+            recess: {
+                files: ['<%= yeoman.app %>/styles/**/*.less'],
+                tasks: ['recess']
+            },
             livereload: {
                 files: [
                     '<%= yeoman.app %>/*.html',
@@ -101,6 +105,16 @@ module.exports = function (grunt) {
                 options: {
                     run: true,
                     urls: ['http://localhost:<%= connect.options.port %>/index.html']
+                }
+            }
+        },
+        recess: {
+            dist: {
+                options: {
+                    compile: true
+                },
+                files: {
+                    '<%= yeoman.app %>/styles/main.css': ['<%= yeoman.app %>/styles/main.less']
                 }
             }
         },
@@ -196,6 +210,17 @@ module.exports = function (grunt) {
                         'styles/fonts/*'
                     ]
                 }]
+            },
+            server: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>/bower_components/font-awesome/',
+                    dest: '<%= yeoman.app %>',
+                    src: [
+                        'font/*'
+                    ]
+                }]
             }
         },
         concurrent: {
@@ -222,6 +247,8 @@ module.exports = function (grunt) {
         }
 
         grunt.task.run([
+            'recess',
+            'copy:server',
             'livereload-start',
             'connect:livereload',
             'open',
@@ -230,12 +257,14 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', [
+        'recess',
         'connect:test',
         'mocha'
     ]);
 
     grunt.registerTask('build', [
         'clean:dist',
+        'recess',
         'copy',
         'useminPrepare',
         'concurrent:dist',
