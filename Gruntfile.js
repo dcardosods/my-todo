@@ -215,7 +215,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     dot: true,
-                    cwd: '<%= yeoman.app %>/bower_components/font-awesome/',
+                    cwd: '<%= yeoman.app %>/components/font-awesome/',
                     dest: '<%= yeoman.app %>',
                     src: [
                         'font/*'
@@ -236,6 +236,14 @@ module.exports = function (grunt) {
             all: {
                 rjsConfig: '<%= yeoman.app %>/scripts/main.js'
             }
+        },
+        shell: {
+            'bootstrap-amd': {
+                command: [
+                    '[ -d <%= yeoman.app %>/components/bootstrap/amd/ ]',
+                    './node_modules/.bin/bootstrap-amd <%= yeoman.app %>/components/bootstrap/'
+                ].join('||')
+            }
         }
     });
 
@@ -247,6 +255,7 @@ module.exports = function (grunt) {
         }
 
         grunt.task.run([
+            'shell',
             'recess',
             'copy:server',
             'livereload-start',
@@ -263,6 +272,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
+        'shell',
         'clean:dist',
         'recess',
         'copy',

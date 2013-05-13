@@ -1,6 +1,7 @@
 require.config({
     paths: {
-        jquery: '../components/jquery/jquery'
+        jquery: '../components/jquery/jquery',
+        bootstrap: '../components/bootstrap/amd/src'
     },
     shim: {
     }
