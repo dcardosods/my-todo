@@ -21,7 +21,13 @@
         describe( 'List', function() {
             describe( 'Empty list', function() {
                 it( 'lenght should be 0', function () {
-                    expect( list.count ).to.equal( 0 );
+                    expect( list.count() ).to.equal( 0 );
+                });
+            });
+            describe( 'One item list', function() {
+                it( 'lenght should be 1', function () {
+                    list.add( 'Some text' );
+                    expect( list.count() ).to.equal( 1 );
                 });
             });
         });
