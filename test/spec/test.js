@@ -1,16 +1,19 @@
 /*global define, describe, it, expect, assert */
 'use strict';
 (function () {
-    define( [], function() {
-        describe( 'Give it some context', function() {
-            describe( 'maybe a bit more context here', function() {
-                it( 'should run here few assertions', function() {
-                    expect( 1 ).to.equal( 1 );
-                    assert.equal( 1, 1 );
+    define( ['task'], function( Task ) {
+        describe( 'Tasks', function() {
+            var newTask = new Task('Some text');
+
+            describe( 'New task', function() {
+                it( 'text should exist', function () {
+                    expect( newTask.text ).to.exist;
                 });
-                it( 'should run here few assertions', function() {
-                    expect( 1 ).to.equal( 1 );
-                    assert.equal( 1, 1 );
+                it( 'should to not be done', function() {
+                    expect( newTask.done ).to.not.be.ok;
+                });
+                it( 'should to not be archived', function() {
+                    expect( newTask.archived ).to.not.be.ok;
                 });
             });
         });
