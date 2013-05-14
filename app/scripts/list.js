@@ -10,6 +10,9 @@ define( ['task'], function ( Task ) {
         add: function( text ) {
             var newTask = new Task( text );
             tasks.push( newTask );
+        },
+        delete: function( index ) {
+            tasks.splice( index, 1 );
         }
     };
 });

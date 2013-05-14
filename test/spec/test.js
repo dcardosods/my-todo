@@ -30,6 +30,12 @@
                     expect( list.count() ).to.equal( 1 );
                 });
             });
+            describe( 'after one list item deleted', function() {
+                it( 'lenght should be 0', function () {
+                    list.delete( 0 );
+                    expect( list.count() ).to.equal( 0 );
+                });
+            });
         });
     });
 })();
