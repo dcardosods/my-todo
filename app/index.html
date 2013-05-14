@@ -16,17 +16,54 @@
         <!-- endbuild -->
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="hero-unit">
-                <h1>'Allo, 'Allo!</h1>
-                <p>You now have</p>
-                <ul>
-                    <li>HTML5 Boilerplate</li>
-                    <li>Twitter Bootstrap</li>
-                    <li>RequireJS</li>
-                </ul>
-                <p>installed.</p>
-                <h3>Enjoy coding! - Yeoman</h3>
+                <h1 class="text-center">My TO DO List</h1>
+            </div>
+            <div class="row-fluid">
+                <div class="span8 offset2">
+                    <form action="#" class="form-inline">
+                        <ul class="unstyled">
+                            <li>
+                                <div class="span3">
+                                    <input type="checkbox" id="all-status">
+                                    <label for="all-status" class="checkbox inline">
+                                        Done/Undone all tasks
+                                    </label>
+                                </div>
+                                <a href="#" class="span3">
+                                    <i class="icon-save"></i>
+                                    Archive done tasks
+                                </a>
+                                <a href="#" class="span3">
+                                    <i class="icon-upload-alt"></i>
+                                    See archived tasks
+                                </a>
+                                <a href="#" class="span3" title="Remove all tasks">
+                                    <i class="icon-remove"></i>
+                                    Delete all tasks
+                                </a>
+                            </li>
+                            <li>
+                                <div class="span3">
+                                    <input type="checkbox" id="task-status[0]">
+                                    <label for="task-status[0]" class="checkbox inline">
+                                        Done/Undone task
+                                    </label>
+                                </div>
+                                <div class="span6">
+                                    <input type="text" id="task-text[0]" placeholder="Input new task here!" class="span12">
+                                </div>
+                                <div class="span3">
+                                    <a href="#">
+                                        <i class="icon-remove"></i>
+                                        Delete task
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
             </div>
         </div>
 
