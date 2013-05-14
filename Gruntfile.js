@@ -31,7 +31,7 @@ module.exports = function (grunt) {
             livereload: {
                 files: [
                     '<%= yeoman.app %>/*.html',
-                    '<%= yeoman.app %>/styles/{,*/}*.css',
+                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
                     '<%= yeoman.app %>/scripts/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
@@ -49,7 +49,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             lrSnippet,
-                            mountFolder(connect, 'app')
+                            mountFolder(connect, 'app'),
+                            mountFolder(connect, '.tmp')
                         ];
                     }
                 }
@@ -83,11 +84,13 @@ module.exports = function (grunt) {
                 files: [{
                     dot: true,
                     src: [
+                        '.tmp',
                         '<%= yeoman.dist %>/*',
                         '!<%= yeoman.dist %>/.git*'
                     ]
                 }]
             },
+            server: '.tmp'
         },
         jshint: {
             options: {
@@ -114,7 +117,7 @@ module.exports = function (grunt) {
                     compile: true
                 },
                 files: {
-                    '<%= yeoman.app %>/styles/main.css': ['<%= yeoman.app %>/styles/main.less']
+                    '.tmp/styles/main.css': ['<%= yeoman.app %>/styles/main.less']
                 }
             }
         },
@@ -148,8 +151,7 @@ module.exports = function (grunt) {
                     src: [
                         '<%= yeoman.dist %>/scripts/{,*/}*.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
-                        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-                        '<%= yeoman.dist %>/styles/fonts/*'
+                        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}'
                     ]
                 }
             }
@@ -191,6 +193,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%= yeoman.dist %>/styles/main.css': [
+                        '.tmp/styles/{,*/}*.css',
                         '<%= yeoman.app %>/styles/{,*/}*.css'
                     ]
                 }
@@ -199,24 +202,34 @@ module.exports = function (grunt) {
         // Put files not handled in other tasks here
         copy: {
             dist: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= yeoman.app %>',
-                    dest: '<%= yeoman.dist %>',
-                    src: [
-                        '*.html',
-                        'images/{,*/}*.{webp,gif}',
-                        'styles/fonts/*'
-                    ]
-                }]
+                files: [
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= yeoman.app %>',
+                        dest: '<%= yeoman.dist %>',
+                        src: [
+                            '*.html',
+                            'images/{,*/}*.{webp,gif}',
+                        ]
+                    },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= yeoman.app %>/components/font-awesome/',
+                        dest: '<%= yeoman.dist %>',
+                        src: [
+                            'font/*'
+                        ]
+                    }
+                ]
             },
             server: {
                 files: [{
                     expand: true,
                     dot: true,
                     cwd: '<%= yeoman.app %>/components/font-awesome/',
-                    dest: '<%= yeoman.app %>',
+                    dest: '.tmp',
                     src: [
                         'font/*'
                     ]
@@ -256,6 +269,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'shell',
+            'clean:server',
             'recess',
             'copy:server',
             'livereload-start',
@@ -266,6 +280,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', [
+        'clean:server',
         'recess',
         'connect:test',
         'mocha'
@@ -275,7 +290,7 @@ module.exports = function (grunt) {
         'shell',
         'clean:dist',
         'recess',
-        'copy',
+        'copy:dist',
         'useminPrepare',
         'concurrent:dist',
         'requirejs',
