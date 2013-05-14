@@ -1,7 +1,7 @@
 /*global define, describe, it, expect, assert */
 'use strict';
 (function () {
-    define( ['task'], function( Task ) {
+    define( ['task', 'list'], function( Task, list ) {
         describe( 'Tasks', function() {
             var newTask = new Task('Some text');
 
@@ -14,6 +14,14 @@
                 });
                 it( 'should to not be archived', function() {
                     expect( newTask.archived ).to.not.be.ok;
+                });
+            });
+        });
+
+        describe( 'List', function() {
+            describe( 'Empty list', function() {
+                it( 'lenght should be 0', function () {
+                    expect( list.count ).to.equal( 0 );
                 });
             });
         });
