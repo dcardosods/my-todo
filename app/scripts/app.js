@@ -1,6 +1,17 @@
 /*global define */
-define([], function () {
+define( ['jquery', 'tpl!templates/task'], function ( $, tplTask ) {
     'use strict';
 
-    return '\'Allo \'Allo!';
+    function init() {
+        var rendered = tplTask({
+            index: 0,
+            value: ''
+        });
+
+        $('#list').append( rendered );
+    }
+
+    return {
+        init: init
+    }
 });

@@ -1,15 +1,25 @@
 require.config({
     paths: {
         jquery: '../components/jquery/jquery',
-        bootstrap: '../components/bootstrap/amd/src'
+        bootstrap: '../components/bootstrap/amd/src',
+        underscore: '../components/underscore/underscore',
+        text: 'vendor/text',
+        tpl: 'vendor/tpl',
+        templates: '../templates',
     },
     shim: {
+        'underscore': {
+            exports: '_'
+        }
+    },
+    tpl: {
+        extension: '.tpl'
     }
 });
 
-require(['app', 'jquery'], function (app, $) {
+require( ['app'], function ( app ) {
     'use strict';
-    // use app here
-    console.log(app);
-    console.log('Running jQuery %s', $().jquery);
+
+    app.init();
 });
+
