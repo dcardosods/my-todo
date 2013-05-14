@@ -1,4 +1,5 @@
-/*global define, describe, it, expect, assert */
+/*global define, describe, it, expect */
+/*jshint expr: true */
 'use strict';
 (function () {
     define( ['task', 'list'], function( Task, list ) {

@@ -13,5 +13,5 @@ define( ['jquery', 'tpl!templates/task'], function ( $, tplTask ) {
 
     return {
         init: init
-    }
+    };
 });
