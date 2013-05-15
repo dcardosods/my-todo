@@ -34,9 +34,9 @@
             describe( 'with below task inserted', function () {
                 it( 'should be return an one item list', function () {
                     expect( list.getList() ).to.deep.equal([{
-                        "text": "Some text",
-                        "done": false,
-                        "archived": false
+                        'text': 'Some text',
+                        'done': false,
+                        'archived': false
                     }]);
                 });
             });
