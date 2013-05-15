@@ -12,6 +12,19 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         e.preventDefault();
     });
 
+    /*
+     * Handle envent in disabled input
+     * Reference from solution here http://stackoverflow.com/questions/3100319/event-on-a-disabled-input
+     */
+    $('div').on( 'dblclick', function( e ) {
+        $( e.target )
+            .hide()
+            .prev('input[disabled]')
+            .prop( 'disabled', false )
+            .focus()
+            .select();
+    });
+
     function renderTask( task, index ) {
         var rendered = tplTask({
             index: index,
