@@ -1,14 +1,28 @@
 /*global define */
-define( ['jquery', 'tpl!templates/task'], function ( $, tplTask ) {
+define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) {
     'use strict';
 
-    function init() {
+    function renderList() {
+        var tasks = list.getList();
         var rendered = tplTask({
             index: 0,
             value: ''
         });
 
-        $('#list').append( rendered );
+        var i = 1;
+        var lenght = tasks.length;
+        for ( ; i < length; i++ ) {
+            rendered += tplTask({
+                index: i,
+                value: list[i].text
+            });
+        }
+
+        return rendered;
+    }
+
+    function init() {
+        $('#list').append( renderList( list ) );
     }
 
     return {

@@ -7,7 +7,7 @@
             var newTask = new Task('Some text');
 
             describe( 'New task', function() {
-                it( 'text should exist', function () {
+                it( 'should have existence of text property', function () {
                     expect( newTask.text ).to.exist;
                 });
                 it( 'should to not be done', function() {
@@ -19,20 +19,29 @@
             });
         });
 
-        describe( 'List', function() {
-            describe( 'Empty list', function() {
-                it( 'lenght should be 0', function () {
+        describe( 'The list', function() {
+            describe( 'empty', function() {
+                it( 'should have lenght equals 0', function () {
                     expect( list.count() ).to.equal( 0 );
                 });
             });
-            describe( 'One item list', function() {
-                it( 'lenght should be 1', function () {
+            describe( 'with one item', function() {
+                it( 'should have lenght equal 1', function () {
                     list.add( 'Some text' );
                     expect( list.count() ).to.equal( 1 );
                 });
             });
+            describe( 'with below task inserted', function () {
+                it( 'should be return an one item list', function () {
+                    expect( list.getList() ).to.deep.equal([{
+                        "text": "Some text",
+                        "done": false,
+                        "archived": false
+                    }]);
+                });
+            });
             describe( 'after one list item deleted', function() {
-                it( 'lenght should be 0', function () {
+                it( 'should have lenght equal 0', function () {
                     list.delete( 0 );
                     expect( list.count() ).to.equal( 0 );
                 });

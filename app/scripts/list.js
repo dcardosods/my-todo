@@ -13,6 +13,9 @@ define( ['task'], function ( Task ) {
         },
         delete: function( index ) {
             tasks.splice( index, 1 );
+        },
+        getList: function() {
+            return tasks;
         }
     };
 });
