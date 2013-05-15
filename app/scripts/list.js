@@ -30,6 +30,11 @@ define( ['task'], function ( Task ) {
             tasks.splice( index, 1 );
             store( 'todo', tasks);
         },
+        update: function( text, index ) {
+            var updatedTask = new Task( text );
+            tasks.splice( index, 1, updatedTask);
+            store( 'todo', tasks );
+        },
         getList: function() {
             return store('todo');
         }

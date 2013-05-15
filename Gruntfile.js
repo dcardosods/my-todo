@@ -273,7 +273,7 @@ module.exports = function (grunt) {
             'clean:server',
             'recess',
             'copy:server',
-            // 'livereload-start',
+            'livereload-start',
             'connect:livereload',
             'open',
             'watch'

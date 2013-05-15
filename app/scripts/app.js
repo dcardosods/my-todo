@@ -3,17 +3,36 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
     'use strict';
 
     $('form').on( 'submit', function( e ) {
-        var taskText = $('#task-text').val();
-        var insertedTaskIndex = list.add( taskText );
+        var $newTaskInput = $('#task-text');
+        var taskText = '';
+        var taskIndex;
+        var $editingTaskInput;
 
-        $('#list').append( renderTask( list.getList()[ insertedTaskIndex ], insertedTaskIndex ) );
-        $('#task-text').val('');
+        if ( $newTaskInput.is(':enabled') ) {
+            taskText = $.trim( $newTaskInput.val() );
+            taskIndex = list.add( taskText );
+
+            $('#list').append( renderTask( list.getList()[ taskIndex ], taskIndex ) );
+            $newTaskInput.val('');
+        }
+        else {
+            $editingTaskInput = $('input:text:enabled');
+            taskText = $.trim( $editingTaskInput.val() );
+
+            if ( taskText ) {
+                taskIndex = parseInt( $editingTaskInput.attr('data-index'), 10 );
+                list.update( taskText, taskIndex );
+
+                $editingTaskInput.blur().prop( 'disabled', true );
+                $newTaskInput.prop( 'disabled', false );
+            }
+        }
 
         e.preventDefault();
     });
 
     /*
-     * Handle envent in disabled input
+     * Handle event in disabled input
      * Reference from solution here http://stackoverflow.com/questions/3100319/event-on-a-disabled-input
      */
     $('div').on( 'dblclick', function( e ) {
@@ -23,6 +42,8 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
             .prop( 'disabled', false )
             .focus()
             .select();
+
+        $('#task-text').prop( 'disabled', true );
     });
 
     function renderTask( task, index ) {
