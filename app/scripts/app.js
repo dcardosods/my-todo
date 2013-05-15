@@ -38,6 +38,16 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         e.preventDefault();
     });
 
+    $( document ).on( 'click', '.task-delete', function( e ) {
+        var taskIndex = parseInt( $(this).attr('data-index'), 10 );
+        list.delete( taskIndex );
+        renderList();
+
+        $( '#task-' + taskIndex ).remove();
+
+        e.preventDefault();
+    });
+
     /*
      * Handle event in disabled input
      * Reference from solution here http://stackoverflow.com/questions/3100319/event-on-a-disabled-input

@@ -1,4 +1,4 @@
-<li class="task">
+<li class="task" id="task-<%= index %>">
     <div class="span3">
         <input type="checkbox" id="task-status-<%= index %>"
             <% if ( status ) { %> checked="<%= status %>" <% } %>>
@@ -13,7 +13,7 @@
         <div class="dblclick"></div>
     </div>
     <div class="span3">
-        <a href="#">
+        <a href="#" class="task-delete" data-index="<%= index %>">
             <i class="icon-remove"></i>
             Delete task
         </a>
