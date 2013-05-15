@@ -40,7 +40,7 @@ module.exports = function (grunt) {
         },
         connect: {
             options: {
-                port: 8000,
+                port: 9000,
                 // change this to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
@@ -57,6 +57,7 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
+                    port: 8000,
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, 'test'),
@@ -108,7 +109,7 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     run: false,
-                    urls: ['http://localhost:<%= connect.options.port %>/index.html']
+                    urls: ['http://localhost:<%= connect.test.options.port %>/index.html']
                 }
             }
         },
