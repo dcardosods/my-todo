@@ -2,9 +2,9 @@
 define( [], function () {
     'use strict';
 
-    function Task( text ) {
+    function Task( text, done ) {
         this.text = text;
-        this.done = false;
+        this.done = done || false;
         this.archived = false;
     }
 

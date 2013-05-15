@@ -7,6 +7,7 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         var taskText = '';
         var taskIndex;
         var $editingTaskInput;
+        var taskStatus;
 
         if ( $newTaskInput.is(':enabled') ) {
             taskText = $.trim( $newTaskInput.val() );
@@ -21,9 +22,15 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
 
             if ( taskText ) {
                 taskIndex = parseInt( $editingTaskInput.attr('data-index'), 10 );
-                list.update( taskText, taskIndex );
+                taskStatus = $( '#task-status-' + taskIndex ).is(':checked');
+                list.update( taskIndex, taskText, taskStatus );
 
-                $editingTaskInput.blur().prop( 'disabled', true );
+                $editingTaskInput
+                    .blur()
+                    .prop( 'disabled', true )
+                    .next('.dblclick')
+                    .show();
+
                 $newTaskInput.prop( 'disabled', false );
             }
         }
@@ -49,7 +56,8 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
     function renderTask( task, index ) {
         var rendered = tplTask({
             index: index,
-            value: task.text
+            value: task.text,
+            status: task.done
         });
 
         return rendered;

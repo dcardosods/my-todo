@@ -30,8 +30,8 @@ define( ['task'], function ( Task ) {
             tasks.splice( index, 1 );
             store( 'todo', tasks);
         },
-        update: function( text, index ) {
-            var updatedTask = new Task( text );
+        update: function( index, text, done ) {
+            var updatedTask = new Task( text, done );
             tasks.splice( index, 1, updatedTask);
             store( 'todo', tasks );
         },
