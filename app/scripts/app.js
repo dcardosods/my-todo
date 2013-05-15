@@ -38,10 +38,10 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         var tasks = list.getList();
         var rendered = '';
 
-        var i = 1;
-        var lenght = tasks.length;
+        var i = 0;
+        var length = tasks.length;
         for ( ; i < length; i++ ) {
-            rendered += renderTask( list[ i ], i );
+            rendered += renderTask( tasks[ i ], i );
         }
 
         return rendered;

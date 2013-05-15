@@ -7,18 +7,31 @@ define( ['task'], function ( Task ) {
         return tasks.length;
     }
 
+    function store( namespace, data ) {
+        if ( arguments.length > 1 ) {
+            localStorage.setItem( namespace, JSON.stringify( data ) );
+            return count() - 1;
+        }
+        else {
+            var stored = localStorage.getItem( namespace );
+            tasks = ( stored && JSON.parse( stored ) ) || [];
+            return tasks;
+        }
+    }
+
     return {
         count: count,
         add: function( text ) {
             var newTask = new Task( text );
             tasks.push( newTask );
-            return count() - 1;
+            return store( 'todo', tasks);
         },
         delete: function( index ) {
             tasks.splice( index, 1 );
+            store( 'todo', tasks);
         },
         getList: function() {
-            return tasks;
+            return store('todo');
         }
     };
 });
