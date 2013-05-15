@@ -27,7 +27,12 @@ define( ['task'], function ( Task ) {
             return store( 'todo', tasks);
         },
         delete: function( index ) {
-            tasks.splice( index, 1 );
+            if ( index ) {
+                tasks.splice( index, 1 );
+            }
+            else {
+                tasks = [];
+            }
             store( 'todo', tasks);
         },
         update: function( index, text, done ) {

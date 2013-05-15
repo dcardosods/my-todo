@@ -39,11 +39,16 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
     });
 
     $( document ).on( 'click', '.task-delete', function( e ) {
-        var taskIndex = parseInt( $(this).attr('data-index'), 10 );
+        var taskIndex = parseInt( $(this).attr('data-index'), 10 ) || undefined;
         list.delete( taskIndex );
         renderList();
 
-        $( '#task-' + taskIndex ).remove();
+        if ( taskIndex ) {
+            $( '#task-' + taskIndex ).remove();
+        }
+        else {
+            $('.task').remove();
+        }
 
         e.preventDefault();
     });
