@@ -73,7 +73,11 @@ define([
     });
 
     $( document ).on( 'blur', 'input[id^=task-text-]:enabled', function() {
-        $(this).prop( 'disabled', true );
+        $(this)
+            .prop( 'disabled', true )
+            .next('.dblclick')
+            .show();
+        $('#task-text').prop( 'disabled', false );
     });
 
     /*
