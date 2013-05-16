@@ -1,16 +1,21 @@
 /*global define */
-define( ['task'], function ( Task ) {
+define( ['task', 'underscore'], function ( Task, _ ) {
     'use strict';
     var tasks = [];
 
     function count() {
-        return tasks.length;
+        return {
+            all: tasks.length,
+            done: _.filter( tasks, function( task ) {
+                return task.done;
+            }).length
+        }
     }
 
     function store( namespace, data ) {
         if ( arguments.length > 1 ) {
             localStorage.setItem( namespace, JSON.stringify( data ) );
-            return count() - 1;
+            return count().all - 1;
         }
         else {
             var stored = localStorage.getItem( namespace );

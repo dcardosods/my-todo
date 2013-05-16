@@ -1,5 +1,11 @@
 /*global define */
-define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) {
+define([
+        'jquery',
+        'tpl!templates/task',
+        'tpl!templates/count',
+        'list'
+    ], function ( $, tplTask, tplCount, list ) {
+
     'use strict';
 
     $('form').on( 'submit', function( e ) {
@@ -35,6 +41,8 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
             }
         }
 
+        renderCount();
+
         e.preventDefault();
     });
 
@@ -43,12 +51,13 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         var taskIndex = parseInt( $this.attr('data-index'), 10 );
         var taskText = $( '#task-text-' + taskIndex ).val();
         list.update( taskIndex, taskText, $this.is(':checked') );
+
+        renderCount();
     });
 
     $( document ).on( 'click', '.task-delete', function( e ) {
         var taskIndex = parseInt( $(this).attr('data-index'), 10 ) || undefined;
         list.delete( taskIndex );
-        renderList();
 
         if ( taskIndex ) {
             $( '#task-' + taskIndex ).remove();
@@ -56,6 +65,8 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         else {
             $('.task').remove();
         }
+
+        renderCount();
 
         e.preventDefault();
     });
@@ -85,6 +96,10 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         return rendered;
     }
 
+    function renderCount() {
+        $('#task-count').html( tplCount( list.count() ) ) ;
+    }
+
     function renderList() {
         var tasks = list.getList();
         var rendered = '';
@@ -100,6 +115,7 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
 
     function init() {
         $('#list').append( renderList( list ) );
+        renderCount();
     }
 
     return {
