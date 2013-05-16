@@ -7,7 +7,10 @@ define( ['task', 'underscore'], function ( Task, _ ) {
         return {
             all: tasks.length,
             done: _.filter( tasks, function( task ) {
-                return task.done;
+                return task.done && !task.archived;
+            }).length,
+            archived: _.filter( tasks, function( task ) {
+                return task.archived;
             }).length
         };
     }

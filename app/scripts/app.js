@@ -77,6 +77,7 @@ define([
 
         $('.task').remove();
         $('#list').append( renderList( list ) );
+        renderCount();
 
         e.preventDefault();
     });
@@ -86,6 +87,7 @@ define([
 
         $('.task').remove();
         $('#list').append( renderList( list ) );
+        renderCount();
 
         e.preventDefault();
     });
