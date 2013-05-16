@@ -72,6 +72,10 @@ define([
         e.preventDefault();
     });
 
+    $( document ).on( 'blur', 'input[id^=task-text-]:enabled', function() {
+        $(this).prop( 'disabled', true );
+    });
+
     /*
      * Handle event in disabled input
      * Reference from solution here http://stackoverflow.com/questions/3100319/event-on-a-disabled-input
