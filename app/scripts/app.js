@@ -1,10 +1,10 @@
 /*global define */
 define([
-        'jquery',
-        'tpl!templates/task',
-        'tpl!templates/count',
-        'list'
-    ], function ( $, tplTask, tplCount, list ) {
+    'jquery',
+    'tpl!templates/task',
+    'tpl!templates/count',
+    'list'
+], function ( $, tplTask, tplCount, list ) {
 
     'use strict';
 
@@ -46,7 +46,7 @@ define([
         e.preventDefault();
     });
 
-    $( document ).on( 'change', '.task-status', function( e ) {
+    $( document ).on( 'change', '.task-status', function() {
         var $this = $(this);
         var taskIndex = parseInt( $this.attr('data-index'), 10 );
         var taskText = $( '#task-text-' + taskIndex ).val();
@@ -56,13 +56,14 @@ define([
     });
 
     $( document ).on( 'click', '.task-delete', function( e ) {
-        var taskIndex = parseInt( $(this).attr('data-index'), 10 ) || undefined;
-        list.delete( taskIndex );
+        var taskIndex = parseInt( $(this).attr('data-index'), 10 );
 
-        if ( taskIndex ) {
+        if ( $.isNumeric( taskIndex ) ) {
+            list.delete( taskIndex );
             $( '#task-' + taskIndex ).remove();
         }
         else {
+            list.delete();
             $('.task').remove();
         }
 

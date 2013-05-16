@@ -9,7 +9,7 @@ define( ['task', 'underscore'], function ( Task, _ ) {
             done: _.filter( tasks, function( task ) {
                 return task.done;
             }).length
-        }
+        };
     }
 
     function store( namespace, data ) {
