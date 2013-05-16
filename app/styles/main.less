@@ -1,7 +1,35 @@
 @import "../components/bootstrap/less/bootstrap.less";
-@import "../components/bootstrap/less/responsive.less"; // Don't forget to comment lines 22 to remove the second import call to **mixin.less**
 @import "../components/font-awesome/less/font-awesome.less";
 
+.padding() {
+    padding: 10px 0;
+}
+
+.hero-unit {
+    padding: 20px 60px;
+}
+.controls {
+    border-bottom: 1px solid #F2E205;
+}
+.new {
+    .padding();
+    margin-bottom: 3px;
+}
+.task {
+    .border-bottom-radius(5px);
+    .border-top-radius(20px);
+    .padding();
+    background: #41C0F2;
+    border-bottom: 1px solid #0487D9;
+    border-top: 2px dotted #0487D9;
+    margin: 0 0 -5px 0;
+}
+.task-delete {
+    color: @red;
+}
+.task-delete:hover {
+    color: lighten(@red, 30%);
+}
 .dblclick {
     bottom: 0;
     cursor: pointer;
