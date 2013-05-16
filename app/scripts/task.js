@@ -2,10 +2,10 @@
 define( [], function () {
     'use strict';
 
-    function Task( text, done ) {
+    function Task( text, done, archive ) {
         this.text = text;
         this.done = done || false;
-        this.archived = false;
+        this.archived = archive || false;
     }
 
     Task.prototype = new Task();

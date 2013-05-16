@@ -40,10 +40,26 @@ define( ['task', 'underscore'], function ( Task, _ ) {
             }
             store( 'todo', tasks);
         },
-        update: function( index, text, done ) {
-            var updatedTask = new Task( text, done );
+        update: function( index, text, done, archive ) {
+            var updatedTask = new Task( text, done, archive );
             tasks.splice( index, 1, updatedTask);
             store( 'todo', tasks );
+        },
+        archive: function() {
+            tasks = _.map( tasks, function( task ) {
+                if ( task.done ) {
+                    task.archived = true;
+                }
+                return task;
+            });
+            store( 'todo', tasks);
+        },
+        unarchive: function() {
+            tasks = _.map( tasks, function( task ) {
+                task.archived = false;
+                return task;
+            });
+            store( 'todo', tasks);
         },
         getList: function() {
             return store('todo');

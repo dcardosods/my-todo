@@ -1,8 +1,10 @@
-<li class="task clearfix" id="task-<%= index %>">
+<li class="task clearfix<% if ( archived ) { %> hide <% } %>"
+    id="task-<%= index %>">
+
     <div class="span3 text-right">
         <input type="checkbox" id="task-status-<%= index %>" class="task-status"
             title="Done or undone this task" data-index="<%= index %>"
-            <% if ( status ) { %> checked="<%= status %>" <% } %>>
+            <% if ( status ) { %> checked <% } %>>
         <label for="task-status-<%= index %>" class="checkbox inline hide-text">
             Done or undone this task
         </label>
@@ -19,4 +21,5 @@
             Delete task
         </a>
     </div>
+
 </li>

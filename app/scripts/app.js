@@ -72,6 +72,24 @@ define([
         e.preventDefault();
     });
 
+    $( document ).on( 'click', '#tasks-archive', function( e ) {
+        list.archive();
+
+        $('.task').remove();
+        $('#list').append( renderList( list ) );
+
+        e.preventDefault();
+    });
+
+    $( document ).on( 'click', '#tasks-unarchive', function( e ) {
+        list.unarchive();
+
+        $('.task').remove();
+        $('#list').append( renderList( list ) );
+
+        e.preventDefault();
+    });
+
     $( document ).on( 'blur', 'input[id^=task-text-]:enabled', function() {
         $(this)
             .prop( 'disabled', true )
@@ -99,7 +117,8 @@ define([
         var rendered = tplTask({
             index: index,
             value: task.text,
-            status: task.done
+            status: task.done,
+            archived: task.archived
         });
 
         return rendered;
