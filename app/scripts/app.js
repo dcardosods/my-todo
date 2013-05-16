@@ -76,8 +76,8 @@ define([
      * Handle event in disabled input
      * Reference from solution here http://stackoverflow.com/questions/3100319/event-on-a-disabled-input
      */
-    $('div').on( 'dblclick', function( e ) {
-        $( e.target )
+    $( document ).on( 'dblclick', '.dblclick', function( e ) {
+        $(this)
             .hide()
             .prev('input[disabled]')
             .prop( 'disabled', false )
