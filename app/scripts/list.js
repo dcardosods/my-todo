@@ -35,7 +35,7 @@ define( ['task', 'underscore'], function ( Task, _ ) {
             return store( 'todo', tasks);
         },
         delete: function( index ) {
-            if ( index ) {
+            if ( index || index === 0 ) {
                 tasks.splice( index, 1 );
             }
             else {
