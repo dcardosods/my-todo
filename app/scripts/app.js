@@ -38,6 +38,13 @@ define( ['jquery', 'tpl!templates/task', 'list'], function ( $, tplTask, list ) 
         e.preventDefault();
     });
 
+    $( document ).on( 'change', '.task-status', function( e ) {
+        var $this = $(this);
+        var taskIndex = parseInt( $this.attr('data-index'), 10 );
+        var taskText = $( '#task-text-' + taskIndex ).val();
+        list.update( taskIndex, taskText, $this.is(':checked') );
+    });
+
     $( document ).on( 'click', '.task-delete', function( e ) {
         var taskIndex = parseInt( $(this).attr('data-index'), 10 ) || undefined;
         list.delete( taskIndex );

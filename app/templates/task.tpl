@@ -1,6 +1,7 @@
 <li class="task" id="task-<%= index %>">
     <div class="span3">
-        <input type="checkbox" id="task-status-<%= index %>"
+        <input type="checkbox" id="task-status-<%= index %>" class="task-status"
+            data-index="<%= index %>"
             <% if ( status ) { %> checked="<%= status %>" <% } %>>
         <label for="task-status-<%= index %>" class="checkbox inline">
             Done/Undone task
