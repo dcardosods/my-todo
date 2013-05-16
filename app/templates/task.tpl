@@ -9,7 +9,7 @@
     </div>
     <div class="span6 relative">
         <input type="text" id="task-text-<%= index %>"
-            placeholder="Input new task here!" class="span12"
+            placeholder="Edit task here!" class="span12"
             value="<%= value %>" data-index="<%= index %>" disabled>
         <div class="dblclick"></div>
     </div>
