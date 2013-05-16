@@ -60,13 +60,13 @@ define([
 
         if ( $.isNumeric( taskIndex ) ) {
             list.delete( taskIndex );
-            $( '#task-' + taskIndex ).remove();
         }
         else {
             list.delete();
-            $('.task').remove();
         }
 
+        $('.task').remove();
+        $('#list').append( renderList( list ) );
         renderCount();
 
         e.preventDefault();
